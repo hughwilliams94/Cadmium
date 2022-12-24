@@ -232,6 +232,66 @@
 				algo = "sha1";
 			};
 		};
+		fdt@23{
+			description = "sc7180-trogdor-wormdingler-rev0-boe.dtb";
+			data = /incbin/("arch/arm64/boot/dts/qcom/sc7180-trogdor-wormdingler-rev0-boe.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			hash@1{
+				algo = "sha1";
+			};
+		};
+		fdt@24{
+			description = "sc7180-trogdor-wormdingler-rev0-inx.dtb";
+			data = /incbin/("arch/arm64/boot/dts/qcom/sc7180-trogdor-wormdingler-rev0-inx.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			hash@1{
+				algo = "sha1";
+			};
+		};
+		fdt@25{
+			description = "sc7180-trogdor-wormdingler-rev1-boe-rt5682s.dtb";
+			data = /incbin/("arch/arm64/boot/dts/qcom/sc7180-trogdor-wormdingler-rev1-boe-rt5682s.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			hash@1{
+				algo = "sha1";
+			};
+		};
+		fdt@26{
+			description = "sc7180-trogdor-wormdingler-rev1-boe.dtb";
+			data = /incbin/("arch/arm64/boot/dts/qcom/sc7180-trogdor-wormdingler-rev1-boe.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			hash@1{
+				algo = "sha1";
+			};
+		};
+		fdt@27{
+			description = "sc7180-trogdor-wormdingler-rev1-inx-rt5682s.dtb";
+			data = /incbin/("arch/arm64/boot/dts/qcom/sc7180-trogdor-wormdingler-rev1-inx-rt5682s.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			hash@1{
+				algo = "sha1";
+			};
+		};
+		fdt@28{
+			description = "sc7180-trogdor-wormdingler-rev1-inx.dtb";
+			data = /incbin/("arch/arm64/boot/dts/qcom/sc7180-trogdor-wormdingler-rev1-inx.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			hash@1{
+				algo = "sha1";
+			};
+		};
 	};
 	configurations {
 		conf@1{
@@ -321,6 +381,30 @@
 		conf@22{
 			kernel = "kernel@1";
 			fdt = "fdt@22";
+		};
+		conf@23{
+			kernel = "kernel@1";
+			fdt = "fdt@23";
+		};
+		conf@24{
+			kernel = "kernel@1";
+			fdt = "fdt@24";
+		};
+		conf@25{
+			kernel = "kernel@1";
+			fdt = "fdt@25";
+		};
+		conf@26{
+			kernel = "kernel@1";
+			fdt = "fdt@26";
+		};
+		conf@27{
+			kernel = "kernel@1";
+			fdt = "fdt@27";
+		};
+		conf@28{
+			kernel = "kernel@1";
+			fdt = "fdt@28";
 		};
 	};
 };
