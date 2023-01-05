@@ -36,8 +36,6 @@ fi
 
 if [ "$ROOTFS" = "arch" ]; then
 	export chroot="arch-chroot"
-elif [ "$ROOTFS" = "gentoo" ]; then
-	export chroot="arch-chroot"
 else
 	export chroot="chroot"
 fi
