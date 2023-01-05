@@ -227,7 +227,7 @@ jobs:
          name: arm32-void-musl
          path: arm32-void-musl.img 
 
-build-gentoo-arm-32:
+  build-gentoo-arm-32:
    runs-on: ubuntu-latest
    steps:
      - uses: actions/checkout@v2
@@ -255,7 +255,7 @@ build-gentoo-arm-32:
          name: arm32-gentoo
          path: arm32-gentoo.img 
 
-build-gentoo-arm-64:
+  build-gentoo-arm-64:
    runs-on: ubuntu-latest
    steps:
      - uses: actions/checkout@v2
