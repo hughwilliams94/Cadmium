@@ -1,0 +1,29 @@
+#!/bin/bash
+set -x
+set -e
+
+CADMIUMROOT="$(dirname $(dirname $(dirname $(realpath $0))))"
+DESTDIR="$1"
+
+. $CADMIUMROOT/config
+
+GENTOOVER=$(sed 's|/[^/]*$||' <<< $(head -3 <<< $(curl --silent http://www.gtlib.gatech.edu/pub/gentoo/releases/$ARCH/autobuilds/latest-stage3-$ARCH_GENTOO-openrc.txt) | tail -1))
+
+mkdir -p "$CADMIUMROOT/tmp"
+ROOTFS_TAR="http://www.gtlib.gatech.edu/pub/gentoo/releases/$ARCH/autobuilds/$GENTOOVER/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz"
+if [ ! -f "$CADMIUMROOT/tmp/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz" ]; then
+	rm $CADMIUMROOT/tmp/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz || true
+	wget "$ROOTFS_TAR" -O $CADMIUMROOT/tmp/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz
+fi
+
+tar xpvf $CADMIUMROOT/tmp/stage3*.tar.xz --xattrs-include='*.*' --numeric-owner -C $DESTDIR
+
+cp --dereference /etc/resolv.conf $DESTDIR/etc/resolv.conf
+
+$chroot $DESTDIR $qemu /usr/bin/emerge-webrsync
+$chroot $DESTDIR $qemu /usr/bin/emerge --sync
+
+echo 'USE="-gtk-doc -ppp -consolekit -systemd elogind dbus pulseaudio X"' >> $DESTDIR/etc/portage/make.conf
+echo 'FEATURES="-pid-sandbox"' >> $DESTDIR/etc/portage/make.conf
+
+$chroot $DESTDIR $qemu /usr/bin/emerge -v networkmanager
