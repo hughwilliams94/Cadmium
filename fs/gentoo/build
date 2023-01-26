@@ -34,4 +34,4 @@ $chroot $DESTDIR $qemu /usr/bin/emerge --sync
 echo 'USE="-gtk-doc -ppp -consolekit -systemd elogind dbus pulseaudio X"' >> $DESTDIR/etc/portage/make.conf
 echo 'FEATURES="-pid-sandbox"' >> $DESTDIR/etc/portage/make.conf
 
-$chroot $DESTDIR $qemu /usr/bin/emerge -v networkmanager
+$chroot $DESTDIR $qemu /usr/bin/emerge -v net-misc/networkmanager sys-kernel/linux-firmware
