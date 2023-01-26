@@ -4,7 +4,7 @@
 FS_FANCYNAME="Gentoo Arm"
 FS_HAS_OOBE="false"
 FS_INST_PKG="emerge -v"
-FS_UPDATE="emaint sync -A && emerge --update --newuse --deep @world"
+FS_UPDATE="emaint sync -a && emerge --update --newuse --deep @world"
 FS_USERGROUPS="wheel,video,audio,input"
 
 # packages
