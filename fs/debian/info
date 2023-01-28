@@ -5,16 +5,18 @@
 FS_FANCYNAME="Debian"
 FS_HAS_OOBE="false"
 FS_INST_PKG="apt install -y"
+FS_INST_BLD_DEP="apt build-dep"
 FS_UPDATE="apt update && apt upgrade"
 FS_USERGROUPS="sudo,video,audio,render"
 
 # packages:
-FS_PKGS_CD_BASE="vim network-manager debootstrap parted f2fs-tools libudev-dev build-essential git kmscube weston ssh htop"
+FS_PKGS_CD_BASE="vim neovim network-manager debootstrap parted f2fs-tools libudev-dev build-essential git kmscube ssh htop gcc-arm-linux-gnueabihf libarchive-tools curl wget cgpt vboot-utils libncurses-dev gawk flex bison openssl libssl-dev dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf qemu-user-static gcc-aarch64-linux-gnu debootstrap binutils-aarch64-linux-gnu git u-boot-tools binfmt-support lz4"
 FS_PKGS_CD_UI_BASE="firefox pulseaudio alsa-utils"
+FS_PKGS_LINUX_BLD_DEP="linux"
 
 # bootloader
 FS_PKGS_CD_BOOTFW_UBOOT="u-boot-tools"
-FS_PKGS_CD_BOOTFW_DEPTHCHARGE="$FS_PKGS_CD_BOOTFW_UBOOT vboot-utils cgpt"
+FS_PKGS_CD_BOOTFW_DEPTHCHARGE="$FS_PKGS_CD_BOOTFW_UBOOT vboot-utils"
 
 # ui
 FS_SUPPORTED_UIS="gnome kde phosh sway"

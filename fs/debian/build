@@ -9,4 +9,8 @@ source "$CADMIUMROOT/config"
 
 debootstrap --arch="$ARCH_DEB" "$SUITE" "$DESTDIR" https://deb.debian.org/debian/
 
+chroot "$DESTDIR" echo 'deb-src http://azure.archive.ubuntu.com/ubuntu/ lunar main restricted' | sudo tee -a /etc/apt/sources.list
+
 chroot "$DESTDIR" apt update
+
+chroot "$DESTDIR" apt install -y libunwind-dev
