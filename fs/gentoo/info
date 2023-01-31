@@ -16,8 +16,8 @@ FS_PKGS_CD_BOOTFW_UBOOT="dev-embedded/u-boot-tools"
 FS_PKGS_CD_BOOTFW_DEPTHCHARGE="$FS_PKGS_CD_BOOTFW_UBOOT sys-boot/vboot-utils"
 
 # ui
-FS_SUPPORTED_UIS="kde gnome"
-FS_PKGS_CD_UI_GNOME="gnome"
+FS_SUPPORTED_UIS="kde"
+# FS_PKGS_CD_UI_GNOME="gnome-base/gnome"
 FS_PKGS_CD_UI_KDE="plasma-meta"
 #FS_PKGS_CD_UI_PHOSH="xfce4-terminal phosh phosh-tablet xwayland"
 #FS_PKGS_CD_UI_SWAY="sway i3status dmenu xorg-server-xwayland grim slurp brightnessctl foot"

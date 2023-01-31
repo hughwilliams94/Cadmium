@@ -32,7 +32,7 @@ $chroot $DESTDIR $qemu /usr/bin/emerge-webrsync
 $chroot $DESTDIR $qemu /usr/bin/emerge --sync
 
 echo 'USE="-gtk-doc -doc -consolekit -systemd elogind dbus pulseaudio opengl vulkan X"' >> $DESTDIR/etc/portage/make.conf
-echo 'FEATURES="-pid-sandbox"' >> $DESTDIR/etc/portage/make.conf
+echo 'FEATURES="-pid-sandbox candy"' >> $DESTDIR/etc/portage/make.conf
 echo 'ACCEPT_LICENSE="*"' >> $DESTDIR/etc/portage/make.conf
 echo "ACCEPT_KEYWORDS="~$ARCH"" >> $DESTDIR/etc/portage/make.conf
 

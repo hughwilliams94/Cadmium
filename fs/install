@@ -267,14 +267,7 @@ if [ "$FS_HAS_OOBE" = "false" ]; then
 					echo 'tty | grep tty1 && exec sway' >> $DESTDIR/home/$USERNAME/.bashrc
 					;;
 				gnome)
-					if [ "$ROOTFS" = "gentoo" ]; then
-						eselect profile list
-						eselect profile set default/linux/$ARCH//desktop/gnome
-						$chroot $DESTDIR $FS_ADD_DMI
-						echo 'CHECKVT=7\nDISPLAYMANAGER="gdm"' > $DESTDIR/etc/conf.d/display-manager
-					else 
 						$chroot $DESTDIR $FS_INST_PKG $FS_PKGS_CD_UI_GNOME
-					fi
 					;;
 				kde)
 					$chroot $DESTDIR $FS_INST_PKG $FS_PKGS_CD_UI_KDE
