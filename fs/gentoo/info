@@ -3,6 +3,7 @@
 # basic info
 FS_FANCYNAME="Gentoo Arm"
 FS_HAS_OOBE="false"
+FS_ADD_DMI="rc-update add display-manager default"
 FS_INST_PKG="emerge -v"
 FS_UPDATE="emaint sync -a && emerge --update --newuse --deep @world"
 FS_USERGROUPS="wheel,video,audio,input"
@@ -17,6 +18,6 @@ FS_PKGS_CD_BOOTFW_DEPTHCHARGE="$FS_PKGS_CD_BOOTFW_UBOOT sys-boot/vboot-utils"
 # ui
 FS_SUPPORTED_UIS="kde gnome"
 FS_PKGS_CD_UI_GNOME="gnome"
-FS_PKGS_CD_UI_KDE="plasma"
+FS_PKGS_CD_UI_KDE="plasma-meta"
 #FS_PKGS_CD_UI_PHOSH="xfce4-terminal phosh phosh-tablet xwayland"
 #FS_PKGS_CD_UI_SWAY="sway i3status dmenu xorg-server-xwayland grim slurp brightnessctl foot"

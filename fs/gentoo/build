@@ -7,10 +7,10 @@ DESTDIR="$1"
 
 . $CADMIUMROOT/config
 
-GENTOOVER=$(sed 's|/[^/]*$||' <<< $(head -3 <<< $(curl --silent http://www.gtlib.gatech.edu/pub/gentoo/releases/$ARCH/autobuilds/latest-stage3-$ARCH_GENTOO-openrc.txt) | tail -1))
+GENTOOVER=$(sed 's|/[^/]*$||' <<< $(head -3 <<< $(curl --silent https://bouncer.gentoo.org/fetch/root/all/releases/$ARCH/autobuilds/latest-stage3-$ARCH_GENTOO-openrc.txt) | tail -1))
 
 mkdir -p "$CADMIUMROOT/tmp"
-ROOTFS_TAR="http://www.gtlib.gatech.edu/pub/gentoo/releases/$ARCH/autobuilds/$GENTOOVER/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz"
+ROOTFS_TAR="https://bouncer.gentoo.org/fetch/root/all/releases/$ARCH/autobuilds/$GENTOOVER/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz"
 if [ ! -f "$CADMIUMROOT/tmp/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz" ]; then
 	rm $CADMIUMROOT/tmp/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz || true
 	wget "$ROOTFS_TAR" -O $CADMIUMROOT/tmp/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz
@@ -34,6 +34,7 @@ $chroot $DESTDIR $qemu /usr/bin/emerge --sync
 echo 'USE="-gtk-doc -doc -consolekit -systemd elogind dbus pulseaudio opengl vulkan X"' >> $DESTDIR/etc/portage/make.conf
 echo 'FEATURES="-pid-sandbox"' >> $DESTDIR/etc/portage/make.conf
 echo 'ACCEPT_LICENSE="*"' >> $DESTDIR/etc/portage/make.conf
+echo "ACCEPT_KEYWORDS="~$ARCH"" >> $DESTDIR/etc/portage/make.conf
 
 $chroot $DESTDIR $qemu /usr/bin/emerge -uvDN @world
 
