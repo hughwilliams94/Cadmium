@@ -7,6 +7,8 @@ DESTDIR="$1"
 
 . $CADMIUMROOT/config
 
+THREADS="$(expr $(nproc) / 2)"
+
 GENTOOVER=$(sed 's|/[^/]*$||' <<< $(head -3 <<< $(curl --silent https://bouncer.gentoo.org/fetch/root/all/releases/$ARCH/autobuilds/latest-stage3-$ARCH_GENTOO-openrc.txt) | tail -1))
 
 mkdir -p "$CADMIUMROOT/tmp"
@@ -31,10 +33,11 @@ sudo mount --make-slave $DESTDIR/run
 $chroot $DESTDIR $qemu /usr/bin/emerge-webrsync
 $chroot $DESTDIR $qemu /usr/bin/emerge --sync
 
-echo 'USE="-gtk-doc -doc -consolekit -systemd elogind dbus pulseaudio opengl vulkan X"' >> $DESTDIR/etc/portage/make.conf
 echo 'FEATURES="-pid-sandbox candy"' >> $DESTDIR/etc/portage/make.conf
 echo 'ACCEPT_LICENSE="*"' >> $DESTDIR/etc/portage/make.conf
 echo "ACCEPT_KEYWORDS="~$ARCH"" >> $DESTDIR/etc/portage/make.conf
+echo "MAKEOPTS="-j$THREADS -l$THREADS""
+echo 'USE="-gtk-doc -doc -consolekit -systemd elogind dbus pulseaudio opengl vulkan X"' >> $DESTDIR/etc/portage/make.conf
 
 $chroot $DESTDIR $qemu /usr/bin/emerge -uvDN @world
 
