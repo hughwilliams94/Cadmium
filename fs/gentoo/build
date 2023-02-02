@@ -9,10 +9,10 @@ DESTDIR="$1"
 
 THREADS="$(expr $(nproc) / 2)"
 
-GENTOOVER=$(sed 's|/[^/]*$||' <<< $(head -3 <<< $(curl --silent https://bouncer.gentoo.org/fetch/root/all/releases/$ARCH/autobuilds/latest-stage3-$ARCH_GENTOO-openrc.txt) | tail -1))
+GENTOOVER=$(sed 's|/[^/]*$||' <<< $(head -3 <<< $(curl --silent http://www.gtlib.gatech.edu/pub/gentoo/releases/$ARCH/autobuilds/latest-stage3-$ARCH_GENTOO-openrc.txt) | tail -1))
 
 mkdir -p "$CADMIUMROOT/tmp"
-ROOTFS_TAR="https://bouncer.gentoo.org/fetch/root/all/releases/$ARCH/autobuilds/$GENTOOVER/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz"
+ROOTFS_TAR="http://www.gtlib.gatech.edu/pub/gentoo/releases/$ARCH/autobuilds/$GENTOOVER/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz"
 if [ ! -f "$CADMIUMROOT/tmp/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz" ]; then
 	rm $CADMIUMROOT/tmp/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz || true
 	wget "$ROOTFS_TAR" -O $CADMIUMROOT/tmp/stage3-$ARCH_GENTOO-openrc-$GENTOOVER.tar.xz
