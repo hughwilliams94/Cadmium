@@ -1,1 +1,5 @@
+Debian:
 gcc-arm-linux-gnueabihf libarchive-tools curl wget f2fs-tools cgpt vboot-utils libncurses-dev gawk flex bison openssl libssl-dev dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf qemu-user-static gcc-aarch64-linux-gnu debootstrap binutils-aarch64-linux-gnu git u-boot-tools binfmt-support lz4 bc
+
+Void:
+cross-arm-none-eabi-gcc-32bit cross-arm-none-eabi-gcc-dbg libarchive curl wget f2fs-tools vboot-utils ncurses gawk flex bison openssl libssl1.1 dkms libelf eudev-libudev autoconf qemu-user-static binfmt-support debootstrap binutils binutils-32bit binutils-devel binutils-devel-32bit cross-arm-none-eabi-binutils	u-boot-tools lz4 bc
