@@ -33,7 +33,7 @@ sudo mount --make-slave $DESTDIR/run
 $chroot $DESTDIR $qemu /usr/bin/emerge-webrsync
 $chroot $DESTDIR $qemu /usr/bin/emerge --sync
 
-echo 'FEATURES=\"-pid-sandbox candy parallel-install parallel-fetch"' >> $DESTDIR/etc/portage/make.conf
+echo 'FEATURES="-pid-sandbox candy parallel-install parallel-fetch"' >> $DESTDIR/etc/portage/make.conf
 echo 'ACCEPT_LICENSE="*"' >> $DESTDIR/etc/portage/make.conf
 echo "ACCEPT_KEYWORDS=\"~$ARCH"\" >> $DESTDIR/etc/portage/make.conf
 echo "MAKEOPTS=\"-j$THREADS -l$THREADS"\"
