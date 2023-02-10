@@ -35,6 +35,11 @@ for x in $(find $CADMIUMROOT/board/* -type d -printf '%f\n'); do
 	fi
 done
 
+if [ "$COMPATIBLE" = "hana" ] | [ "$COMPATIBLE" = "elm" ]; then
+	mkdir -p "$DESTDIR/etc/NetworkManager/conf.d/"
+	cp -r "$CADMIUMROOT/baseboard/oak/default-wifipowersave-on.conf" "$DESTDIR/etc/NetworkManager/conf.d/"
+fi
+
 if [ $TARGET = none ]; then
 	echo "Failed to autodetect device, bailing out"
 	exit 1
