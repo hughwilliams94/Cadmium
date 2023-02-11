@@ -35,11 +35,6 @@ for x in $(find $CADMIUMROOT/board/* -type d -printf '%f\n'); do
 	fi
 done
 
-if [ "$COMPATIBLE" = "hana" ] | [ "$COMPATIBLE" = "elm" ]; then
-	mkdir -p "$DESTDIR/etc/NetworkManager/conf.d/"
-	cp -r "$CADMIUMROOT/baseboard/oak/default-wifipowersave-on.conf" "$DESTDIR/etc/NetworkManager/conf.d/"
-fi
-
 if [ $TARGET = none ]; then
 	echo "Failed to autodetect device, bailing out"
 	exit 1
@@ -48,6 +43,13 @@ fi
 . $CADMIUMROOT/board/$TARGET/boardinfo
 . $CADMIUMROOT/baseboard/$BASEBOARD/boardinfo
 #echo "$SOC $BOARD $BASEBOARD"
+
+if [ "$BASEBOARD" = "oak" ]; then
+	mkdir -p /etc/NetworkManager/conf.d/
+	cp "$CADMIUMROOT/baseboard/oak/default-wifipowersave-on.conf" /etc/NetworkManager/conf.d/
+	systemctl restart NetworkManager
+	sleep 5
+fi
 
 # don't even try installing if the device is about to die
 for x in /sys/class/power_supply/*; do
@@ -181,6 +183,11 @@ if [ "$BASEBOARD" = "trogdor" ]; then
 	$chroot $DESTDIR systemctl enable rmtfs
 fi
 
+if [ "$BASEBOARD" = "oak" ]; then
+	mkdir -p "$DESTDIR/etc/NetworkManager/conf.d/"
+	cp "$CADMIUMROOT/baseboard/oak/default-wifipowersave-on.conf" $DESTDIR/etc/NetworkManager/conf.d/default-wifipowersave-on.conf
+fi
+
 $chroot $DESTDIR $FS_INST_PKG $BOOTFW_PKGS
 
 if [ "$FS_HAS_OOBE" = "false" ]; then
@@ -277,7 +284,7 @@ if [ "$FS_HAS_OOBE" = "false" ]; then
 					echo 'tty | grep tty1 && exec sway' >> $DESTDIR/home/$USERNAME/.bashrc
 					;;
 				gnome)
-						$chroot $DESTDIR $FS_INST_PKG $FS_PKGS_CD_UI_GNOME
+					$chroot $DESTDIR $FS_INST_PKG $FS_PKGS_CD_UI_GNOME
 					;;
 				kde)
 					if [ "$ROOTFS" = "gentoo" ]; then
