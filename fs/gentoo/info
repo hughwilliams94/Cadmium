@@ -3,10 +3,8 @@
 # basic info
 FS_FANCYNAME="Gentoo Arm"
 FS_HAS_OOBE="false"
-FS_RC_UPDATE="rc-update"
 FS_INST_PKG="emerge -v"
 FS_SYNC_PKG="emaint sync -a"
-FS_ESELECT_REPO="eselect repository add"
 FS_UPDATE="emaint sync -a && emerge --update --newuse --deep @world"
 FS_USERGROUPS="wheel,video,audio,input"
 

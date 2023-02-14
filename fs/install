@@ -232,11 +232,6 @@ if [ "$FS_HAS_OOBE" = "false" ]; then
 					;;
 				sway)
 					# TODO: config
-
-					if [ $ROOTFS = "gentoo" ]; then
-						$chroot $DESTDIR $FS_ESELECT_REPO guru
-						$chroot $DESTDIR $FS_SYNC_PKG
-					fi
 					$chroot $DESTDIR $FS_INST_PKG $FS_PKGS_CD_UI_SWAY
 
 					MODKEY="invalid"
