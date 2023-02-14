@@ -20,6 +20,6 @@ FS_PKGS_CD_BOOTFW_DEPTHCHARGE="$FS_PKGS_CD_BOOTFW_UBOOT sys-boot/vboot-utils"
 # ui
 FS_SUPPORTED_UIS=""
 #FS_PKGS_CD_UI_GNOME="gnome-base/gnome"
-FS_PKGS_CD_UI_KDE="kde-plasma/plasma-meta x11-misc/sddm gui-libs/display-manager-init"
+# FS_PKGS_CD_UI_KDE="kde-plasma/plasma-meta x11-misc/sddm gui-libs/display-manager-init"
 #FS_PKGS_CD_UI_PHOSH="xfce4-terminal phosh phosh-tablet xwayland"
-FS_PKGS_CD_UI_SWAY="gui-wm/sway x11-misc/i3status x11-misc/dmenu x11-base/xwayland gui-apps/grim gui-apps/slurp app-misc/brightnessctl gui-apps/foot"
+# FS_PKGS_CD_UI_SWAY="gui-wm/sway x11-misc/i3status x11-misc/dmenu x11-base/xwayland gui-apps/grim gui-apps/slurp app-misc/brightnessctl gui-apps/foot"

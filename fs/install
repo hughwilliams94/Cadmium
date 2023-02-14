@@ -287,15 +287,7 @@ if [ "$FS_HAS_OOBE" = "false" ]; then
 					$chroot $DESTDIR $FS_INST_PKG $FS_PKGS_CD_UI_GNOME
 					;;
 				kde)
-					if [ "$ROOTFS" = "gentoo" ]; then
-						$chroot $DESTDIR /bin/rm -rf /etc/portage/package.use
-						$chroot $DESTDIR echo "kde-plasma/kwin lock\ndev-qt/qtcore icu\nkde-frameworks/kconfig qml\nmedia-video/vlc ogg\nmedia-plugins/gst-plugins-meta vorbis ogg\nkde-frameworks/kitemmodels qml\nkde-frameworks/prison qml\nkde-frameworks/sonnet qml" > /etc/portage/package.use
-						$chroot $DESTDIR $FS_INST_PKG $FS_PKGS_CD_UI_KDE
-						$chroot $DESTDIR $FS_RC_UPDATE add display-manager default
-						echo 'CHECKVT=7\nDISPLAYMANAGER="sddm"' > $DESTDIR/etc/conf.d/display-manager
-					else
-						$chroot $DESTDIR $FS_INST_PKG $FS_PKGS_CD_UI_KDE
-					fi
+					$chroot $DESTDIR $FS_INST_PKG $FS_PKGS_CD_UI_KDE
 					;;
 			esac
 			cp -r $CADMIUMROOT/fs/ucm/* $DESTDIR/usr/share/alsa/ucm2/conf.d/
