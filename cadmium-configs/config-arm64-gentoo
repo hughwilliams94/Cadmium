@@ -24,7 +24,7 @@ SUITE=sid
 
 # Which kernel should be built. disables firmware
 # kernelorg: from kernel.org libre: from linux-libre.fsfla.org
-KERNEL=kernelorg
+KERNEL=powervr
 
 # How many threads should be used for building kernel
 THREADS="$(nproc)"
