@@ -17,10 +17,14 @@ ROOTFS=debian
 # f2fs, ext4
 FILESYSTEM=f2fs
 
-# Debian and debian-ish distro suite (Not for arch)
+# Debian and debian-ish distro suite (Not for arch or fedora)
 # sid, testing, stable
 # impish, hirsute, focal
 SUITE=sid
+
+# Fedora distro branch (Not for debian or arch)
+# fedora version (ex. 37), rawhide
+FEDORA_BRANCH=rawhide
 
 # Which kernel should be built. disables firmware
 # kernelorg: from kernel.org libre: from linux-libre.fsfla.org

@@ -1,0 +1,37 @@
+#!/bin/bash
+set -x
+set -e
+
+CADMIUMROOT="$(dirname $(dirname $(dirname $(realpath $0))))"
+DESTDIR="$1"
+
+. $CADMIUMROOT/config
+
+# if [ $FEDORA_BRANCH = "rawhide" ] then;
+	FEDORAVER=$(curl https://mirrors.rit.edu/fedora/fedora/linux/development/rawhide/COMPOSE_ID)
+# else
+#	FEDORAVER=$(curl https://mirrors.rit.edu/fedora/fedora/linux/releases/$FEDORA_BRANCH/COMPOSE_ID)
+# fi
+
+mkdir -p "$CADMIUMROOT/tmp"
+
+# if [ $FEDORA_BRANCH = "rawhide" ] then;
+	ROOTFS_TAR="https://mirrors.rit.edu/fedora/fedora/linux/development/rawhide/Workstation/aarch64/images/$FEDORAVER.aarch64.raw.xz"
+# else
+#	ROOTFS_TAR="https://mirrors.rit.edu/fedora/fedora/linux/development/rawhide/Workstation/aarch64/images/Fedora-Workstation-Rawhide-20230320.n.0.aarch64.raw.xz"
+# fi
+if [ ! -f "$CADMIUMROOT/tmp/fedora-$FEDORAVER.tar.gz" ]; then
+	rm $CADMIUMROOT/tmp/fedora-$FEDORAVER.tar.gz || true
+	wget "$ROOTFS_TAR" -O $CADMIUMROOT/tmp/fedora-$FEDORAVER.tar.gz
+fi
+tar xfp $CADMIUMROOT/tmp/fedora-$FEDORAVER.tar.gz -C $DESTDIR
+
+$chroot $DESTDIR $qemu /usr/bin/dnf update --refresh -y
+
+rm $DESTDIR/etc/resolv.conf # resolv.conf -> /run/systemd/resolve/resolv.conf not working in $chroot
+echo "nameserver 1.1.1.1" > $DESTDIR/etc/resolv.conf # TODO: make it configurable or fetch from host?
+
+$chroot $DESTDIR $qemu /usr/bin/dnf install networkmanager -y
+
+$chroot $DESTDIR $qemu systemctl start NetworkManager.service
+$chroot $DESTDIR $qemu systemctl enable NetworkManager.service
