@@ -24,7 +24,7 @@ mkdir -p "$CADMIUMROOT/tmp"
 URL="$ROOTFS_RAW"
 XZFILE="$(basename $URL)"
 FILE="${XZFILE%.xz}"
-DIR="$DESTDIR/tmp/fedora"
+DIR="$CADMIUMROOT/tmp/fedora"
 DEST="${XZFILE%-sda.raw.xz}.tar.xz"
 
 [[ $UID -le 0 ]] || exit 1
