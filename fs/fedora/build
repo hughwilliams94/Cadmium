@@ -16,15 +16,35 @@ DESTDIR="$1"
 mkdir -p "$CADMIUMROOT/tmp"
 
 # if [ $FEDORA_BRANCH = "rawhide" ] then;
-	ROOTFS_TAR="https://mirrors.rit.edu/fedora/fedora/linux/development/rawhide/Workstation/aarch64/images/$FEDORAVER.aarch64.raw.xz"
+	ROOTFS_RAW="https://mirrors.rit.edu/fedora/fedora/linux/development/rawhide/Workstation/aarch64/images/$FEDORAVER.aarch64.raw.xz"
 # else
 #	ROOTFS_TAR="https://mirrors.rit.edu/fedora/fedora/linux/development/rawhide/Workstation/aarch64/images/Fedora-Workstation-Rawhide-20230320.n.0.aarch64.raw.xz"
 # fi
-if [ ! -f "$CADMIUMROOT/tmp/fedora-$FEDORAVER.tar.gz" ]; then
-	rm $CADMIUMROOT/tmp/fedora-$FEDORAVER.tar.gz || true
-	wget "$ROOTFS_TAR" -O $CADMIUMROOT/tmp/fedora-$FEDORAVER.tar.gz
-fi
-tar xfp $CADMIUMROOT/tmp/fedora-$FEDORAVER.tar.gz -C $DESTDIR
+
+URL="$ROOTFS_RAW"
+XZFILE="$(basename $URL)"
+FILE="${XZFILE%.xz}"
+DIR="$DESTDIR/tmp/fedora"
+DEST="${XZFILE%-sda.raw.xz}.tar.xz"
+
+[[ $UID -le 0 ]] || exit 1
+[[ ! -f "$FILE" && ! -f "$XZFILE" ]] && curl -#kLO "$URL"
+[[ ! -f "$FILE" ]] && unxz "$XZFILE"
+
+mountpoint "$DIR" || {
+  losetup -frP "$FILE"
+  mkdir -p "$DIR"
+  mount -L "_/"     "$DIR"
+  mount -L "_/boot" "$DIR/boot"
+  mountpoint "$DIR" || exit 2
+}
+
+export XZ_DEFAULTS="-T0"
+tar -cvpJf "$DEST" -C "$DIR" --selinux --acls --xattrs --numeric-owner --exclude="lost+found" .
+
+umount -fR "$DIR"
+rmdir "$DIR"
+losetup -D
 
 $chroot $DESTDIR $qemu /usr/bin/dnf update --refresh -y
 
