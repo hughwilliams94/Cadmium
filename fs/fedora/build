@@ -7,7 +7,7 @@ DESTDIR="$1"
 
 . $CADMIUMROOT/config
 
- if [ $FEDORA_BRANCH = "development" ] then;
+ if [ $FEDORA_BRANCH = "development" ]; then
 	FEDORAVER=$(curl --silent https://mirrors.rit.edu/fedora/fedora/linux/development/$FEDORA_RELEASE/Workstation/aarch64/images/ | grep -oP '"\K[^"\047]+(?=["\047])' | grep Fedora-Workstation-Rawhide | grep xz | head -1)
  else
 	FEDORAVER=$(curl --silent https://mirrors.rit.edu/fedora/fedora/linux/releases/$FEDORA_RELEASE/Workstation/aarch64/images/ | grep -oP '"\K[^"\047]+(?=["\047])' | grep Fedora-Workstation-37 | grep xz | head -1)
@@ -15,7 +15,7 @@ DESTDIR="$1"
 
 mkdir -p "$CADMIUMROOT/tmp"
 
- if [ $FEDORA_BRANCH = "development" ] then;
+ if [ $FEDORA_BRANCH = "development" ]; then
 	ROOTFS_RAW="https://mirrors.rit.edu/fedora/fedora/linux/development/$FEDORA_RELEASE/Workstation/aarch64/images/$FEDORAVER"
  else
 	ROOTFS_RAW="https://mirrors.rit.edu/fedora/fedora/linux/releases/$FEDORA_RELEASE/Workstation/aarch64/images/$FEDORAVER"
