@@ -22,9 +22,11 @@ FILESYSTEM=f2fs
 # impish, hirsute, focal
 SUITE=sid
 
-# Fedora distro branch (Not for debian or arch)
-# fedora version (ex. 37), rawhide
-FEDORA_BRANCH=rawhide
+# Fedora distro branch (Not for debian or arch)\
+# Fedora branch (releases, development)
+# Fedora version (ex. 37, 38, rawhide)
+FEDORA_BRANCH=development
+FEDORA_RELEASE=rawhide
 
 # Which kernel should be built. disables firmware
 # kernelorg: from kernel.org libre: from linux-libre.fsfla.org

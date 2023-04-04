@@ -7,22 +7,24 @@ DESTDIR="$1"
 
 . $CADMIUMROOT/config
 
-# if [ $FEDORA_BRANCH = "rawhide" ] then;
-	FEDORAVER=$(curl https://mirrors.rit.edu/fedora/fedora/linux/development/rawhide/COMPOSE_ID)
-# else
-#	FEDORAVER=$(curl https://mirrors.rit.edu/fedora/fedora/linux/releases/$FEDORA_BRANCH/COMPOSE_ID)
-# fi
+ if [ $FEDORA_BRANCH = "development" ] then;
+	FEDORAVER=$(curl --silent https://mirrors.rit.edu/fedora/fedora/linux/development/$FEDORA_RELEASE/Workstation/aarch64/images/ | grep -oP '"\K[^"\047]+(?=["\047])' | grep Fedora-Workstation-Rawhide | grep xz | head -1)
+ else
+	FEDORAVER=$(curl --silent https://mirrors.rit.edu/fedora/fedora/linux/releases/$FEDORA_RELEASE/Workstation/aarch64/images/ | grep -oP '"\K[^"\047]+(?=["\047])' | grep Fedora-Workstation-37 | grep xz | head -1)
+ fi
 
 mkdir -p "$CADMIUMROOT/tmp"
 
-# if [ $FEDORA_BRANCH = "rawhide" ] then;
-	ROOTFS_RAW="https://mirrors.rit.edu/fedora/fedora/linux/development/rawhide/Workstation/aarch64/images/$FEDORAVER.aarch64.raw.xz"
-# else
-#	ROOTFS_TAR="https://mirrors.rit.edu/fedora/fedora/linux/development/rawhide/Workstation/aarch64/images/Fedora-Workstation-Rawhide-20230320.n.0.aarch64.raw.xz"
-# fi
+ if [ $FEDORA_BRANCH = "development" ] then;
+	ROOTFS_RAW="https://mirrors.rit.edu/fedora/fedora/linux/development/$FEDORA_RELEASE/Workstation/aarch64/images/$FEDORAVER"
+ else
+	ROOTFS_RAW="https://mirrors.rit.edu/fedora/fedora/linux/releases/$FEDORA_RELEASE/Workstation/aarch64/images/$FEDORAVER"
+ fi
+
+# convert raw.xz to tar.xz
 
 URL="$ROOTFS_RAW"
-XZFILE="$(basename $URL)"
+XZFILE="$(basename $ROOTFS_RAW)"
 FILE="${XZFILE%.xz}"
 DIR="$CADMIUMROOT/tmp/fedora"
 DEST="${XZFILE%-sda.raw.xz}.tar.xz"
