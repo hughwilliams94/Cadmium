@@ -268,10 +268,15 @@ if [ "$FS_HAS_OOBE" = "false" ]; then
 					;;
 				gnome)
 					$chroot $DESTDIR $FS_INST_PKG $FS_PKGS_CD_UI_GNOME
+					$chroot $DESTDIR $FS_INIT_SYSTEM_ENABLE gdm
 					;;
 				kde)
 					$chroot $DESTDIR $FS_INST_PKG $FS_PKGS_CD_UI_KDE
+					$chroot $DESTDIR $FS_INIT_SYSTEM_ENABLE sddm
 					;;
+				lomiri)
+					$chroot $DESTDIR $FS_INST_PKG $FS_PKGS_CD_UI_LOMIRI
+					$chroot $DESTDIR $FS_INIT_SYSTEM_ENABLE lightdm
 			esac
 			cp -r $CADMIUMROOT/fs/ucm/* $DESTDIR/usr/share/alsa/ucm2/conf.d/
 		fi
