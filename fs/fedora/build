@@ -48,11 +48,12 @@ umount -fR "$DIR"
 rmdir "$DIR"
 losetup -D
 
-$chroot $DESTDIR $qemu /usr/bin/dnf update --refresh -y
+tar xfp $CADMIUMROOT/tmp/$DEST -C $DESTDIR
 
 rm $DESTDIR/etc/resolv.conf # resolv.conf -> /run/systemd/resolve/resolv.conf not working in $chroot
 echo "nameserver 1.1.1.1" > $DESTDIR/etc/resolv.conf # TODO: make it configurable or fetch from host?
 
+$chroot $DESTDIR $qemu /usr/bin/dnf update --refresh -y
 $chroot $DESTDIR $qemu /usr/bin/dnf install networkmanager -y
 
 $chroot $DESTDIR $qemu systemctl start NetworkManager.service
