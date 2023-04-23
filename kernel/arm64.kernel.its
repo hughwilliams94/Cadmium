@@ -272,6 +272,56 @@
 				algo = "sha1";
 			};
 		};
+		fdt@27{
+			description = "sc7180-trogdor-lazor-limozeen-nots-r4.dtb";
+			data = /incbin/("arch/arm64/boot/dts/qcom/sc7180-trogdor-lazor-limozeen-nots-r4.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			hash@1{
+				algo = "sha1";
+			};
+		};
+		fdt@28{
+			description = "sc7180-trogdor-lazor-limozeen-nots-r5.dtb";
+			data = /incbin/("arch/arm64/boot/dts/qcom/sc7180-trogdor-lazor-limozeen-nots-r5.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			hash@1{
+				algo = "sha1";
+			};
+		};
+		fdt@29{
+			description = "sc7180-trogdor-lazor-limozeen-nots-r9.dtb";
+			data = /incbin/("arch/arm64/boot/dts/qcom/sc7180-trogdor-lazor-limozeen-nots-r9.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			hash@1{
+				algo = "sha1";
+			};
+		};
+		fdt@30{
+			description = "sc7180-trogdor-lazor-limozeen-r4.dtb";
+			data = /incbin/("arch/arm64/boot/dts/qcom/sc7180-trogdor-lazor-limozeen-r4.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			hash@1{
+				algo = "sha1";
+			};
+		};
+		fdt@31{
+			description = "sc7180-trogdor-lazor-limozeen-r9.dtb";
+			data = /incbin/("arch/arm64/boot/dts/qcom/sc7180-trogdor-lazor-limozeen-r9.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			hash@1{
+				algo = "sha1";
+			};
+		};
 	};
 	configurations {
 		conf@1{
@@ -377,6 +427,26 @@
 		conf@26{
 			kernel = "kernel@1";
 			fdt = "fdt@26";
+		};
+		conf@27{
+			kernel = "kernel@1";
+			fdt = "fdt@27";
+		};
+		conf@28{
+			kernel = "kernel@1";
+			fdt = "fdt@28";
+		};
+		conf@29{
+			kernel = "kernel@1";
+			fdt = "fdt@29";
+		};
+		conf@30{
+			kernel = "kernel@1";
+			fdt = "fdt@30";
+		};
+		conf@31{
+			kernel = "kernel@1";
+			fdt = "fdt@31";
 		};
 	};
 };
