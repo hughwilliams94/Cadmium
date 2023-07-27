@@ -26,11 +26,6 @@ if [ "$(date +'%V%y') $KERNEL" != "$(cat kern-dl-date-$ARCH 2>/dev/null)" ]; the
 
 	cd linux-$ARCH
 
-	for x in $(ls $CADMIUMROOT/kernel/patches/*.patch); do
-		echo "Applying $x"
-		patch -p1 --forward < $x
-	done
-
 	echo "$(date +'%V%y') $KERNEL" > $CADMIUMROOT/tmp/kern-dl-date-$ARCH
 fi
 
@@ -43,7 +38,7 @@ if [ $KERNEL = libre ]; then
 	sed -i'' 's/cadmium/-cadmium/' .config
 fi
 
-make nconfig # if you want to customize config just uncomment this
+# make nconfig # if you want to customize config just uncomment this
 
 echo "Bulding $KERNEL kernel for $ARCH in $(pwd) with $THREADS threads using $CROSS_COMPILE"
 time make -j"$THREADS"
